@@ -1,6 +1,7 @@
 /**
  * Created by huchunbo on 2017/1/12.
  */
+
 function fillArray(value, len) {
     var arr = [];
     for (var i = 0; i < len; i++) {
@@ -36,7 +37,9 @@ var render = function() {
         el: '#app',
         data: {
             userInput: 'aa 1d 90 00 5f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00 0e',
-            message: ''
+            message: '',
+            userSelected: '',
+            originalNumberSystem: 16
         },
         computed: {
             serializationUserInput: function () {
@@ -59,10 +62,47 @@ var render = function() {
                     cache += ' ';
                 }
                 return cache;
+            },
+            selectedArray: function () {
+                var self = this;
+                return this.userSelected
+                    .replace(/[ ]{2,}/ig, ' ')
+                    .split(' ')
+                    .filter(function (x) {return x.length > 0;})
+                    .map(function(x){return parseInt(x, self.originalNumberSystem);});
+            },
+            selectedTo2: function () {
+                return this.selectedArray.map(function (x) {
+                    return x.toString(2);
+                }).join(' ');
+            },
+            selectedTo8: function () {
+                return this.selectedArray.map(function (x) {
+                    return x.toString(8);
+                }).join(' ');
+            },
+            selectedTo10: function () {
+                return this.selectedArray.map(function (x) {
+                    return x.toString(10);
+                }).join(' ');
+            },
+            selectedTo16: function () {
+                return this.selectedArray.map(function (x) {
+                    return x.toString(16);
+                }).join(' ');
             }
         },
         methods: {
+            clear: function () {
+                this.userInput = '';
+            }
+        },
+        mounted: function () {
+            var self = this;
+            document.addEventListener("selectionchange", function(e) {
 
+                self.userSelected = window.getSelection().toString();
+            }, false);
         }
     });
 };
