@@ -1,0 +1,39 @@
+.serial-data-item {
+    margin-bottom: 6px;
+}
+.serial-data-item .index {
+    color: #bdbdbd;
+}
+.serial-data-item:nth-child(2n) .index {
+    background-color: #eff1f4;
+}
+.serial-data-item:nth-child(2n) .data {
+    background-color: #e7e9ec;
+}
+.monospaced-font {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+.user-input-container {
+    position: relative;
+    padding-top: 18px;
+    overflow: auto;
+}
+.user-input-container textarea {
+    padding-top: 20px;
+    background: none;
+    line-height: 36px;
+}
+.user-input-container .user-input {
+
+}
+.computed-result {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    border-color: transparent;
+    box-shadow: none;
+    resize: none;
+    height: 100%;
+    color: #4FBDF2;
+}

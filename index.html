@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <!--styles-->
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <!--scripts-->
+    <script src="static/js/jquery-3.1.1.min.js"></script>
+    <script src="static/js/tether.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/vue.min.js"></script>
+    <script src="static/js/main.js"></script>
+    <script src="static/js/demo.js" defer="true"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <h3>Serial Port XXX Tool</h3>
+        <div class="user-input-container">
+            <textarea class="form-control monospaced-font user-input" rows="3" v-model="userInput"></textarea>
+            <textarea class="form-control monospaced-font computed-result" rows="3" v-model="computedResult"></textarea>
+        </div>
+        <hr>
+        <div class="row text-center">
+            <template v-for="(item, index) in serializationUserInput">
+                <div class="col-xs-1 serial-data-item">
+                    <div class="col-xs-12 index">
+                        {{index}}
+                    </div>
+                    <div class="col-xs-12 data">
+                        {{item}}
+                    </div>
+                    <div class="col-xs-12 data">
+                        {{item}}
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <hr>
+
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
