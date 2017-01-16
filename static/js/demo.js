@@ -39,7 +39,8 @@ var render = function() {
             userInput: 'aa 1d 90 00 5f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00 0e',
             message: '',
             userSelected: '',
-            originalNumberSystem: 16
+            originalNumberSystem: 16,
+            originalDataErrorTip: '原始数据错误，请检查'
         },
         computed: {
             serializationUserInput: function () {
@@ -72,29 +73,30 @@ var render = function() {
                     .map(function(x){return parseInt(x, self.originalNumberSystem);});
             },
             selectedTo2: function () {
-                return this.selectedArray.map(function (x) {
-                    return x.toString(2);
-                }).join(' ');
+                return this.convertSelectionToNumberSystem(2) || this.originalDataErrorTip;
             },
             selectedTo8: function () {
-                return this.selectedArray.map(function (x) {
-                    return x.toString(8);
-                }).join(' ');
+                return this.convertSelectionToNumberSystem(8) || this.originalDataErrorTip;
             },
             selectedTo10: function () {
-                return this.selectedArray.map(function (x) {
-                    return x.toString(10);
-                }).join(' ');
+                return this.convertSelectionToNumberSystem(10) || this.originalDataErrorTip;
             },
             selectedTo16: function () {
-                return this.selectedArray.map(function (x) {
-                    return x.toString(16);
-                }).join(' ');
+                return this.convertSelectionToNumberSystem(16) || this.originalDataErrorTip;
             }
         },
         methods: {
             clear: function () {
                 this.userInput = '';
+            },
+            convertSelectionToNumberSystem: function (numberSystem) {
+                if (this.selectedArray.length == 0) {return ' ';}
+
+                var result =  this.selectedArray.map(function (x) {
+                    return x.toString(numberSystem);
+                }).join(' ');
+
+                return result === 'NaN' ? undefined : result;
             }
         },
         mounted: function () {
